@@ -108,8 +108,19 @@ public class Reception {
     @FXML
     private Button logOut;
     @FXML
-    private void funcLogOut(){
-       
-
+    private void funcLogOut() throws Exception{
+        Parent root;
+        root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Stage RegStage=(Stage) logOut.getScene().getWindow();
+        RegStage.setScene(new Scene(root,520,480));
+    }
+    @FXML
+    private Button backBTN;
+    @FXML
+    private void backAction() throws Exception{
+        Parent root;
+        root = FXMLLoader.load(getClass().getResource("deshboard.fxml"));
+        Stage RegStage=(Stage) backBTN.getScene().getWindow();
+        RegStage.setScene(new Scene(root,595,365));
     }
 }

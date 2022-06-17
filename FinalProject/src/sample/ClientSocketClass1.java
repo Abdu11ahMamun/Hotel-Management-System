@@ -7,16 +7,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.*;
+import java.net.Socket;
+
 public class ClientSocketClass1 extends Application {
     @Override
     public void start(Stage primaryStage244) throws Exception {
-        //  Parent root = FXMLLoader.load(getClass().getResource("socketServer.fxml"));
-        Parent root;
-       root = FXMLLoader.load(getClass().getResource("customerScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("socketServer.fxml"));
 
         //primaryStage244.setTitle("First Client");
         primaryStage244.initStyle(StageStyle.UNDECORATED);
-        primaryStage244.setScene(new Scene(root, 700, 575));
+        primaryStage244.setScene(new Scene(root, 481, 434));
         primaryStage244.show();
     }
     public static void main(String[] args) {

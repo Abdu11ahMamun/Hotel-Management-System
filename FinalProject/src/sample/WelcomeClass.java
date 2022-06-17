@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -17,19 +16,40 @@ public class WelcomeClass {
 
     @FXML
     private Button NextBTN;
+    @FXML
+    private Button customerBTN;
+    @FXML
+    void customerBTNAction(ActionEvent event)throws IOException {
+        Parent root;
+        root = FXMLLoader.load(getClass().getResource("customerScene.fxml"));
+        Stage RegStage=(Stage) customerBTN.getScene().getWindow();
+        RegStage.setScene(new Scene(root,700,550));
+    }
 
     @FXML
     void NextBtnAction(ActionEvent event) throws IOException {
+
         Parent root;
         root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Stage RegStage=(Stage) NextBTN.getScene().getWindow();
         RegStage.setScene(new Scene(root,520,480));
+
+        /*Stage stage=new Stage();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("scene6.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(new javafx.scene.Scene(root, 600, 400));
+        stage.show();*/
 
     }
     @FXML
     void CancelBtnAction(ActionEvent event) {
         Stage stage=(Stage) cancelBTN.getScene().getWindow();
         stage.close();
+
 
     }
 }

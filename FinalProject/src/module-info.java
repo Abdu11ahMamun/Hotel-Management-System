@@ -4,5 +4,6 @@ module FinalProject {
     requires javafx.graphics;
     requires java.sql;
     requires java.naming;
+    requires controlsfx;
     opens sample;
 }

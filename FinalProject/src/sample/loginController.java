@@ -41,13 +41,10 @@ public class loginController {
         stage.close();
     }
     @FXML
-    void loginbtnAction(ActionEvent event) {
-        if(userTextField.getText().isBlank()==false && passwordField.getText().isBlank()==false){
-           // loginbtnlabel.setText("You tried to login");
-            validateLogin();
-        }else {
-            loginbtnlabel.setText("Please enter username and password");
-        }
+    void loginbtnAction(ActionEvent event) throws Exception {
+        // loginbtnlabel.setText("You tried to login");
+        if(userTextField.getText().isBlank()==false && passwordField.getText().isBlank()==false) validateLogin();
+        else loginbtnlabel.setText("Please enter username and password");
 
     }
     @FXML
@@ -57,7 +54,7 @@ public class loginController {
         RegStage.setScene(new Scene(root,550,570));
     }
 
-  public void validateLogin(){
+  public void validateLogin() {
         DatabaseConnection connectNow= new DatabaseConnection();
         Connection connectDB= connectNow.getConnection();
 
@@ -67,7 +64,10 @@ public class loginController {
             ResultSet queryResult= statement.executeQuery(verifyLogin);
             while (queryResult.next()){
                 if (queryResult.getInt(1)==1){
-                   loginbtnlabel.setText("Congratulations!");
+                    Parent root;
+                    root = FXMLLoader.load(getClass().getResource("deshboard.fxml"));
+                    Stage RegStage=(Stage) loginbtn.getScene().getWindow();
+                    RegStage.setScene(new Scene(root,595,365));
 
                 }else {
                     loginbtnlabel.setText("Invalid Password");

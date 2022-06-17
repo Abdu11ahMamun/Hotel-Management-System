@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.*;
+import java.net.Socket;
+
 public class ClientSocketClass3 extends Application {
     @Override
     public void start(Stage primaryStage244) throws Exception {

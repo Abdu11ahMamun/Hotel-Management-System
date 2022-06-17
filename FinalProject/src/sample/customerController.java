@@ -132,16 +132,16 @@ public class customerController  implements Initializable {
         }
 
         String msg=id+" "+number+" "+name + " " + country + " " + checkIn + " " + deposit + " "+ gender;
-        try {
+       /* try {
            // String msg= msgTextField.getText()+ "\n";
           //  msgTextField.setText("");
-            writer.write(msg);
+          *//*  writer.write(msg);
             writer.flush();
-
+*//*
 
         }catch (IOException e){
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
@@ -149,13 +149,13 @@ public class customerController  implements Initializable {
 
     }
 
-    public void bookingInfo(){
-        String id=methodBox.getValue();
+    public void bookingInfo() {
+        String id = methodBox.getValue();
         String number = numberText.getText();
         String name = custName.getText();
-        String email= custEmail.getText();
-        String country=custCountry.getText();
-        String roomNum=roomCombo.getValue();
+        String email = custEmail.getText();
+        String country = custCountry.getText();
+        String roomNum = roomCombo.getValue();
         String checkIn = custCheckedIn.getText();
         String deposit = custDeposit.getText();
         String gender = null;
@@ -166,16 +166,16 @@ public class customerController  implements Initializable {
             gender = "female";
         }
 
-        System.out.println(id+" "+number+" "+name + " " + country + " " + checkIn + " " + deposit + " "+ gender);
+        System.out.println(id + " " + number + " " + name + " " + country + " " + checkIn + " " + deposit + " " + gender);
 
         /*Database part*/
-        DatabaseConnection connectNow= new DatabaseConnection();
-        Connection connectDB=connectNow.getConnection();
-        if (name.isBlank() == false && number.isBlank() == false && country.isBlank() == false && checkIn.isBlank() == false && gender.isBlank()==false&& deposit.isBlank()==false && gender.isBlank()==false) {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+        if (name.isBlank() == false && number.isBlank() == false && country.isBlank() == false && checkIn.isBlank() == false && gender.isBlank() == false && deposit.isBlank() == false && gender.isBlank() == false) {
             String insertFields = "INSERT INTO `customer`(`id` ,`number`,`name`,`email`,`gender`,`country`,`room_number`,`status`,`deposit`) VALUES('";
-            String insertValues = id + "','" + number+ "','" + name + "','" + email + "','" + gender + "','" +country+"','"+roomNum+"','" +checkIn+ "','" +deposit+"')";
+            String insertValues = id + "','" + number + "','" + name + "','" + email + "','" + gender + "','" + country + "','" + roomNum + "','" + checkIn + "','" + deposit + "')";
             String insertToRegister = insertFields + insertValues;
-            String updateRoom = "update `room` set `availability` = 'Occupied' where `room_number` = "+roomNum;
+            String updateRoom = "update `room` set `availability` = 'Occupied' where `room_number` = " + roomNum;
 
             try {
                 Statement statement = connectDB.createStatement();
@@ -191,80 +191,4 @@ public class customerController  implements Initializable {
             showlabel1.setText("Fill all the label properly");
         }
     }
-    private BufferedWriter writer;
-    private BufferedReader reader;
-    customerController(){
-        String myName="client-1: ";
-
-        try {
-            Socket socket=new Socket("127.0.0.1",5000);
-
-            OutputStreamWriter o=new OutputStreamWriter(socket.getOutputStream());
-            writer=new BufferedWriter(o);
-            InputStreamReader r= new InputStreamReader(socket.getInputStream());
-            reader= new BufferedReader(r);
-
-            writer.write(myName +"\n");
-            writer.flush();
-
-
-
-            //Without multi threading we can't read and write msg at the same time
-          /*  Thread T=new Thread(){
-                public void run(){
-                    try {
-                        String line= reader.readLine()+ "\n";
-                        while (line !=null){
-                            allTextArea.appendText(line);
-                            line=reader.readLine()+"\n";
-
-                        }
-
-
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
-
-                }
-            };
-            T.start();
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }*/
-            Thread t = new Thread(){
-                public void run(){
-                    try{
-                        String line = reader.readLine() + "\n";
-                        while (line != null){
-                            //allTextArea.appendText(line);
-                            line = reader.readLine() + "\n";
-                        }
-                    }
-                    catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-            };
-            t.start();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-   /* @Override
-    public void start(Stage stage) throws Exception {
-      *//*  Parent root;
-        // root = FXMLLoader.load(getClass().getResource("login.fxml"));
-        root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
-        //  root = FXMLLoader.load(getClass().getResource("newCustomerForm.fxml"));
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(new Scene(root, 700, 550));
-        stage.show();*//*
-    }
-    public static void main(String[] args) {
-customerController.java
-customerScene.fxml
-    }*/
 }

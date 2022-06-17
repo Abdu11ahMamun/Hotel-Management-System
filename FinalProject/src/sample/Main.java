@@ -11,13 +11,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-      Parent root = FXMLLoader.load(getClass().getResource("reception.fxml"));
-
-
-
-        //Parent root = FXMLLoader.load(getClass().getResource("checkOut.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 800, 500));
+      // Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("deshboard.fxml"));
+        primaryStage.setTitle("Hotel Management");
+        primaryStage.setScene(new Scene(root, 750, 600));
         primaryStage.show();
     }
 
@@ -25,6 +22,9 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        Thread thread=new Thread(new socketCls());
+        thread.start();
+
         launch(args);
     }
 }

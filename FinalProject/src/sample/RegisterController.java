@@ -3,6 +3,9 @@ package sample;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -75,6 +78,10 @@ public class RegisterController {
                 Statement statement= connectDB.createStatement();
                 statement.executeUpdate(insertToRegister);
                 RegMsg.setText("User has been registered successfully!");
+                Parent root;
+                root = FXMLLoader.load(getClass().getResource("login.fxml"));
+                Stage RegStage=(Stage) registerbtn.getScene().getWindow();
+                RegStage.setScene(new Scene(root,550,450));
 
             }catch (Exception e){
                 e.printStackTrace();
